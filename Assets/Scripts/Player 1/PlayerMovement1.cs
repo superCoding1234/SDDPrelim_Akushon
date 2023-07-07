@@ -1,3 +1,5 @@
+//about player movement
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class PlayerMovement1 : MonoBehaviour
     private CapsuleCollider2D coll;
     private TrailRenderer tr;
     private SpriteRenderer sr;
+    //about moving the player
+    
     private Animator anim;
     
     private bool canDash = true;
