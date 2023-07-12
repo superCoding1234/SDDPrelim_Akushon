@@ -49,6 +49,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             if (canDash && movement != Vector2.zero) dash = true;
         };
+        pi.PlayerMovement.Shoot.performed += GetComponentInChildren<Weapon>().ShootWeapon;
     }
 
     public void SubUpdate()
