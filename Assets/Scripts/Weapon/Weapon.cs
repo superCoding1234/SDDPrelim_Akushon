@@ -1,6 +1,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject[] weaponPool;
     [SerializeField] private Transform firingPoint;
 
-    private void Update()
+    public void ShootWeapon(InputAction.CallbackContext context)
     {
-        if (!Input.GetKeyDown(KeyCode.S) || !canUseWeapon) return;
+        if (!canUseWeapon) return;
         GameObject projectile = weaponPool[GetAvailableProjectile()];
         //orientation
         projectile.transform.position = firingPoint.transform.position;

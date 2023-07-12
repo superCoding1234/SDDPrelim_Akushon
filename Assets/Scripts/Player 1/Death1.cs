@@ -23,6 +23,7 @@ public class Death1 : MonoBehaviour
         pi.Death.Reset.performed += context =>
         {
             pi.Ability.UseAbility.performed -= ab.UseAbilityPerformed;
+            pi.PlayerMovement.Shoot.performed -= GetComponentInChildren<Weapon>().ShootWeapon;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         };
         Debug.Log("Death1 Loaded");
