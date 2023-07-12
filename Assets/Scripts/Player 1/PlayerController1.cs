@@ -54,10 +54,10 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         ps = GetComponentInChildren<ParticleSystem>();
         anim = GetComponent<Animator>();
         
-        pm = GetComponentInChildren<PlayerMovement1>();
-        death = GetComponentInChildren<Death1>();
-        ab = GetComponentInChildren<Abilities1>();
-        health = GetComponentInChildren<Health1>();
+        pm = GetComponent<PlayerMovement1>();
+        death = GetComponent<Death1>();
+        ab = GetComponent<Abilities1>();
+        health = GetComponent<Health1>();
         
         pi = new Player1Inputs();
         pi.PlayerMovement.Enable();

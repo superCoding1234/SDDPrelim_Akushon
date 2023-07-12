@@ -49,6 +49,7 @@ public class Abilities1 : MonoBehaviour
 
     public void SubUpdate()
     {
+        Time.timeScale = 0;//Mathf.Lerp(1, slowTime, 5);
         if (isInAbility && canUseAbility)
         {
             Time.timeScale = Mathf.Lerp(1, slowTime, 5);

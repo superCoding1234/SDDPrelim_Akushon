@@ -84,10 +84,12 @@ public class PlayerMovement1 : MonoBehaviour
             case > .1f:
                 anim.SetBool("facingLeft", false);
                 anim.SetBool("isMoving", true);
+                transform.GetChild(0).localScale = Vector3.right;
                 break;
             case < -.1f:
                 anim.SetBool("facingLeft", true);
                 anim.SetBool("isMoving", true);
+                transform.GetChild(0).localScale = Vector3.left;
                 break;
             default:
                 anim.SetBool("isMoving", false);

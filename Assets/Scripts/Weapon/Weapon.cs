@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
         GameObject projectile = weaponPool[GetAvailableProjectile()];
         //orientation
         projectile.transform.position = firingPoint.transform.position;
-        projectile.GetComponent<Bullet>().direction = transform.parent.localScale.x;
+        projectile.GetComponent<Bullet>().direction = transform.localScale.x;
         //activate bullet
         projectile.SetActive(true);
         canUseWeapon = false;
