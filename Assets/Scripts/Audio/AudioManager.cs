@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    [SerializeField] private Sound[] sounds;
 
     public static AudioManager instance;
 
@@ -32,6 +31,7 @@ public class AudioManager : MonoBehaviour
                 currentSource.pitch = s.pitch;
                 currentSource.loop = s.loop;
                 currentSource.playOnAwake = false;
+                currentSource.outputAudioMixerGroup = s.audioGroup.audioMixerGroup;
             }
         }
     }
@@ -57,6 +57,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound of name " + name + " not found!");
             return;
         }
-        s.source[Random.Range(0, s.source.Count)].Play();
+        s.source[UnityEngine.Random.Range(0, s.source.Count)].Play();
     }
 }
