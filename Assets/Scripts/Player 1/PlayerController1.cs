@@ -1,3 +1,5 @@
+//main script
+
 using System;
 using TMPro;
 using UnityEngine;
