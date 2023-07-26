@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: b0c3c8deb6fbac7479f257be036cd1b2
+guid: 26370d4dc13490e458f0b270b4691cd4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -386188541740870964
-    second: SnakeIdleBobRight_SpriteSheet_0
-  - first:
-      213: 3136416318924318698
-    second: SnakeIdleBobRight_SpriteSheet_1
+      213: -6675631093878870937
+    second: HealthBar1_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,12 +98,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SnakeIdleBobRight_SpriteSheet_0
+      name: HealthBar1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 200
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,29 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc29531419bf3aaf0800000000000000
-      internalID: -386188541740870964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SnakeIdleBobRight_SpriteSheet_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ae7e83d460ac68b20800000000000000
-      internalID: 3136416318924318698
+      spriteID: 76c2ccd93e46b53a0800000000000000
+      internalID: -6675631093878870937
       vertices: []
       indices: 
       edges: []
@@ -145,7 +121,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 688fbb51bf00c8f4683b504d3748eaa1
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -153,8 +129,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SnakeIdleBobRight_SpriteSheet_0: -386188541740870964
-      SnakeIdleBobRight_SpriteSheet_1: 3136416318924318698
+      HealthBar1_0: -6675631093878870937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
