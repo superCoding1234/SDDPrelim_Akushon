@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "AudioMixerGroup")]
 public class AudioGroup : ScriptableObject
 {
     public AudioMixerGroup audioMixerGroup;
