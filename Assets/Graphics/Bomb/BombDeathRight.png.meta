@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: e8cc75ac801821f47bec1f027f19edb6
+guid: bfb9db92e166aa249813023b3a08cafe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2227294742669426013
-    second: download (1)_0
+      213: 4521959613762657316
+    second: BombDeathRight_0
+  - first:
+      213: 2394292738512636826
+    second: BombDeathRight_1
+  - first:
+      213: -578802618504689121
+    second: BombDeathRight_2
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -98,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: download (1)_0
+      name: BombDeathRight_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 183
-        height: 275
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +118,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a208157b3f0711e0800000000000000
-      internalID: -2227294742669426013
+      spriteID: 42c5cf27f4a31ce30800000000000000
+      internalID: 4521959613762657316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombDeathRight_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9bc7576f8c3a3120800000000000000
+      internalID: 2394292738512636826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombDeathRight_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a46f8c51ea7f7f0800000000000000
+      internalID: -578802618504689121
       vertices: []
       indices: 
       edges: []
@@ -121,7 +169,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: dff73dafd8a82b647a0c322d1e37a48e
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +177,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      download (1)_0: -2227294742669426013
+      BombDeathRight_2: -578802618504689121
+      BombDeathRight_0: 4521959613762657316
+      BombDeathRight_1: 2394292738512636826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e8cc75ac801821f47bec1f027f19edb6
+guid: 82408dca2e7a00548b60e52222d75293
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2227294742669426013
-    second: download (1)_0
+      213: -3527791519424756793
+    second: BombSuperBulletsLeft_0
+  - first:
+      213: -668456827545334566
+    second: BombSuperBulletsLeft_1
+  - first:
+      213: -1439891494796827744
+    second: BombSuperBulletsLeft_2
+  - first:
+      213: -6044229905809154544
+    second: BombSuperBulletsLeft_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -98,13 +107,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: download (1)_0
+      name: BombSuperBulletsLeft_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 183
-        height: 275
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +121,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a208157b3f0711e0800000000000000
-      internalID: -2227294742669426013
+      spriteID: 7c34d0bdd44ca0fc0800000000000000
+      internalID: -3527791519424756793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSuperBulletsLeft_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adcc9769e0a29b6f0800000000000000
+      internalID: -668456827545334566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSuperBulletsLeft_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a36789705a740ce0800000000000000
+      internalID: -1439891494796827744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSuperBulletsLeft_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ed373ace49e1ca0800000000000000
+      internalID: -6044229905809154544
       vertices: []
       indices: 
       edges: []
@@ -121,7 +193,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d3fbd911aad1131409accfff07629023
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +201,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      download (1)_0: -2227294742669426013
+      BombSuperBulletsLeft_0: -3527791519424756793
+      BombSuperBulletsLeft_1: -668456827545334566
+      BombSuperBulletsLeft_3: -6044229905809154544
+      BombSuperBulletsLeft_2: -1439891494796827744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
