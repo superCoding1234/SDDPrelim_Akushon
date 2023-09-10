@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e8cc75ac801821f47bec1f027f19edb6
+guid: b1da82ff10115784191fe4b6673b8739
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2227294742669426013
-    second: download (1)_0
+      213: -1025087531007407207
+    second: Controls (2)_0
+  - first:
+      213: -8069215155152396550
+    second: Controls (2)_1
+  - first:
+      213: -3027013607294680
+    second: Controls (2)_2
+  - first:
+      213: -4327766684794113270
+    second: Controls (2)_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -98,13 +107,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: download (1)_0
+      name: Controls (2)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 183
-        height: 275
+        width: 485
+        height: 514
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a208157b3f0711e0800000000000000
-      internalID: -2227294742669426013
+      spriteID: 99b0f9a525826c1f0800000000000000
+      internalID: -1025087531007407207
       vertices: []
       indices: 
       edges: []
@@ -121,7 +130,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: abf831f969f833546a5c3305afe00fe1
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +138,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      download (1)_0: -2227294742669426013
+      Controls (2)_0: -1025087531007407207
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
