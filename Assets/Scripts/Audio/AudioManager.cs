@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] sounds;
+    private Dictionary<string, int> tempMemory = new ();
 
     public static AudioManager instance;
 
@@ -57,6 +59,33 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound of name " + name + " not found!");
             return;
         }
-        s.source[UnityEngine.Random.Range(0, s.source.Count)].Play();
+
+        tempMemory[names] = UnityEngine.Random.Range(0, s.source.Count);
+        s.source[tempMemory[names]].Play();
+    }
+
+    public void Stop(string names)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == names);
+        if (s == null)
+        {
+            Debug.LogWarning($"Sound of name {name} not found!");
+            return;
+        }
+        
+        s.source[tempMemory[names]].Stop();
+    }
+
+    public bool IsPlaying(string names)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == names);
+        if (s == null)
+        {
+            Debug.LogWarning($"Sound of name {name} not found!");
+            return false;
+        }
+
+        if (!tempMemory.ContainsKey(names)) return false;
+        return s.source[tempMemory[names]].isPlaying;
     }
 }

@@ -7,18 +7,57 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private Sprite[] elements;
     private int characterCounter;
     private int elementCounter;
-    private Image im;
 
     public void CycleForwardCharacter(GameObject image)
     {
-        im = image.GetComponent<Image>();
-        im.sprite = characters[Mod(++characterCounter, 3)];
+        image.GetComponent<Image>().sprite = characters[Mod(++characterCounter, 3)];
     }
 
     public void CycleBackwardCharacter(GameObject image)
     {
-        im = image.GetComponent<Image>();
-        im.sprite = characters[Mod(--characterCounter, 3)];
+        image.GetComponent<Image>().sprite = characters[Mod(--characterCounter, 3)];
+    }
+
+    public void CycleForwardElement(GameObject image)
+    {
+        image.GetComponent<Image>().sprite = elements[Mod(++elementCounter, 3)];
+    }
+    
+    public void CycleBackwardElement(GameObject image)
+    {
+        image.GetComponent<Image>().sprite = elements[Mod(--elementCounter, 3)];
+    }
+
+    public void LockInPlayer(int player)
+    {
+        switch (player)
+        {
+            case 1:
+                PlayerPrefs.SetInt("player1Character", Mod(characterCounter, 3));
+                break;
+            case 2:
+                PlayerPrefs.SetInt("player2Character", Mod(characterCounter, 3));
+                break;
+            default:
+                Debug.LogWarning($"Parameter for LockInPlayer for Player{player}");
+                break;
+        }
+
+        switch (PlayerPrefs.GetInt($"player{player}Character"))
+        {
+            case 0:
+                FindFirstObjectByType<AudioManager>().Play("ViperSuper");
+                break;
+            case 1:
+                FindFirstObjectByType<AudioManager>().Play("SovaSuper");
+                break;
+            case 2:
+                FindFirstObjectByType<AudioManager>(). Play("GeckoSuper");
+                break;
+            default:
+                Debug.LogError("FATAL: _player1Character value is NOT valid somehow!");
+                break;
+        }
     }
 
     private int Mod(int x, int y)
