@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     }
     private int GetAvailableProjectile()
     {
-        for (int i = 0; i < weaponPool.Length; i++) if (!weaponPool[i].activeSelf) return i;
+        for (int i = 0; i < weaponPool.Length; i++) if (!weaponPool[i].activeInHierarchy) return i;
         return 0;
     }
     private IEnumerator Cooldown()

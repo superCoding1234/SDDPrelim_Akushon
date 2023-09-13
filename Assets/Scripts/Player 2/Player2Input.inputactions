@@ -222,6 +222,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Death",
+            "id": "87480f8d-ab4d-4797-afd1-ec25d7305280",
+            "actions": [
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "21f9b672-8a9d-4831-aa82-0f7070b0954b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "900bf33f-7103-43bc-b6b4-37aa643dfc7f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

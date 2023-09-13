@@ -41,7 +41,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     [SerializeField] private StandardAbility ultimate;
     [SerializeField] private GameObject timeSlow;
     [SerializeField] private GameObject[] abilityFlags;
-    [SerializeField] private float slowTime = .25f;
+    [SerializeField] private TimeScaleManager tsm;
 
     [Header("Death")] 
     [SerializeField] private TextMeshProUGUI deathMessage;
@@ -68,6 +68,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     private float[] activetimes = new float[2], cooldowns = new float[2];
     private int index;
     private bool isInAbility;
+    private float fixedTimeScale;
 
     #endregion
 
@@ -106,7 +107,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         
         if(elemental.abilityType == AbilityType.ultimate || ultimate.abilityType == AbilityType.elemental) Debug.LogWarning("Ability type of " + gameObject + " do not match!");
         
-        #endregion
+        #endregion 
     }
     private void InitializeInputs()
     {
@@ -138,11 +139,13 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         {
             isInAbility = false;
             pi.Ability.Disable();
+            pi.PlayerMovement.Enable();
         };
         pi.PlayerMovement.Ability.started += context =>
         {
             isInAbility = true;
             pi.Ability.Enable();
+            pi.PlayerMovement.Disable();
         };
 
         #endregion
@@ -271,13 +274,15 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
             isDead = true;
             deathMessage.text = "PLAYER1 DIED LMFAO";
             deathMessage.gameObject.SetActive(true);
+            FindFirstObjectByType<AudioManager>().Stop("BattleMusic");
+            FindFirstObjectByType<AudioManager>().Stop("BattleMusicMix");
         }
     }
 
     private void DeathCollision(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("KO")) return;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        currentHealth = 0;
     }
     
     #endregion
@@ -328,22 +333,24 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
                 }
                 break;
         }
-        Time.timeScale = Mathf.Lerp(1, slowTime, 5);
         if (isInAbility)
         {
+            StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
+            tsm.player1 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
-            Time.timeScale = Mathf.Lerp(1, slowTime, 5);
             if (pi.Ability.CycleAbility.WasPressedThisFrame())
             {
+                currentAbility.OffHoverAbility(gameObject);
                 abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", false);
                 index += (int) pi.Ability.CycleAbility.ReadValue<float>();
             }
             abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", true);
+            currentAbility.OnHoverAbility(gameObject);
         }
         else
         {
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", false);
-            Time.timeScale = Mathf.Lerp(slowTime, 1, 5);
+            tsm.player1 = false;
             foreach (var o in abilityFlags)
             {
                 o.GetComponent<Animator>().SetBool("abilityUse", false);

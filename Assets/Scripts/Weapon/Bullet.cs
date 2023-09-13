@@ -13,18 +13,20 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         currentTime = despawnTime;
+        if (direction > 0) GetComponent<SpriteRenderer>().flipX = false;
+        else if (direction < 0) GetComponent<SpriteRenderer>().flipX = true;
     }
 
     private void Update()
     {
-        if (gameObject.activeSelf) transform.Translate(Vector2.right * (direction * speed * Time.deltaTime));
+        if (gameObject.activeSelf) transform.Translate(Vector3.right * (direction * speed * Time.deltaTime));
         if (currentTime <= 0f) gameObject.SetActive(false);
         else currentTime -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameObject.SetActive(false);
         if (collision.gameObject.CompareTag("Player")) collision.gameObject.GetComponent<IPlayerController>().TakeDamage(10);
+        gameObject.SetActive(false);
     }
 }

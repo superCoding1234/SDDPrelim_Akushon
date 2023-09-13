@@ -39,10 +39,10 @@ public class CharacterSelection : MonoBehaviour
                 PlayerPrefs.SetInt("player2Character", Mod(characterCounter, 3));
                 break;
             default:
-                Debug.LogWarning($"Parameter for LockInPlayer for Player{player}");
+                Debug.LogWarning($"Parameter for LockInPlayer for Player{player} is not valid!");
                 break;
         }
-
+        PlayerPrefs.SetInt($"player{player}Element", elementCounter);
         switch (PlayerPrefs.GetInt($"player{player}Character"))
         {
             case 0:

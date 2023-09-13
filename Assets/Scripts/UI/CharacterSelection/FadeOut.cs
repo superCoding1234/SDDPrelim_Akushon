@@ -5,13 +5,19 @@ using UnityEngine.UI;
 public class FadeOut : MonoBehaviour
 {
     [SerializeField] private Color fadeOutColour;
-
     [SerializeField] private TextMeshProUGUI text;
 
-    public void FadeOutAll()
+    private void Update()
     {
-        GetComponent<Image>().color = fadeOutColour;
-        text.color = fadeOutColour;
-        text.gameObject.GetComponent<RectTransform>().position += Vector3.down * 4;
+        if (GetComponent<ToggleAnimation>().buttonState)
+        {
+            GetComponent<Image>().color = fadeOutColour;
+            text.color = fadeOutColour;
+        }
+        else
+        {
+            GetComponent<Image>().color = Color.white;
+            text.color = Color.white;
+        }
     }
 }

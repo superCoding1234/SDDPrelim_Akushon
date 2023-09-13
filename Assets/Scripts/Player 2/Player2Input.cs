@@ -244,6 +244,34 @@ public partial class @Player2Inputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Death"",
+            ""id"": ""87480f8d-ab4d-4797-afd1-ec25d7305280"",
+            ""actions"": [
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""21f9b672-8a9d-4831-aa82-0f7070b0954b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""900bf33f-7103-43bc-b6b4-37aa643dfc7f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -259,6 +287,9 @@ public partial class @Player2Inputs : IInputActionCollection2, IDisposable
         m_Ability_Ability = m_Ability.FindAction("Ability", throwIfNotFound: true);
         m_Ability_UseAbility = m_Ability.FindAction("UseAbility", throwIfNotFound: true);
         m_Ability_CycleAbility = m_Ability.FindAction("CycleAbility", throwIfNotFound: true);
+        // Death
+        m_Death = asset.FindActionMap("Death", throwIfNotFound: true);
+        m_Death_Reset = m_Death.FindAction("Reset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -420,6 +451,39 @@ public partial class @Player2Inputs : IInputActionCollection2, IDisposable
         }
     }
     public AbilityActions @Ability => new AbilityActions(this);
+
+    // Death
+    private readonly InputActionMap m_Death;
+    private IDeathActions m_DeathActionsCallbackInterface;
+    private readonly InputAction m_Death_Reset;
+    public struct DeathActions
+    {
+        private @Player2Inputs m_Wrapper;
+        public DeathActions(@Player2Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reset => m_Wrapper.m_Death_Reset;
+        public InputActionMap Get() { return m_Wrapper.m_Death; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DeathActions set) { return set.Get(); }
+        public void SetCallbacks(IDeathActions instance)
+        {
+            if (m_Wrapper.m_DeathActionsCallbackInterface != null)
+            {
+                @Reset.started -= m_Wrapper.m_DeathActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_DeathActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_DeathActionsCallbackInterface.OnReset;
+            }
+            m_Wrapper.m_DeathActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
+            }
+        }
+    }
+    public DeathActions @Death => new DeathActions(this);
     public interface IPlayerMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -432,5 +496,9 @@ public partial class @Player2Inputs : IInputActionCollection2, IDisposable
         void OnAbility(InputAction.CallbackContext context);
         void OnUseAbility(InputAction.CallbackContext context);
         void OnCycleAbility(InputAction.CallbackContext context);
+    }
+    public interface IDeathActions
+    {
+        void OnReset(InputAction.CallbackContext context);
     }
 }
