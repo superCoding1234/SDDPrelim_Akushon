@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public enum AbilityState
 {
@@ -25,4 +24,8 @@ public class StandardAbility : ScriptableObject
     public virtual void Activate(GameObject parent) {}
     public virtual void WhileActive(GameObject parent) {}
     public virtual void Deactivate(GameObject parent) {}
+
+    public virtual void OnHoverAbility(GameObject parent) {}
+    
+    public virtual void OffHoverAbility(GameObject parent) {}
 }

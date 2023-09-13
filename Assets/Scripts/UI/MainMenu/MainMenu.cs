@@ -23,11 +23,15 @@ public class MainMenu : MonoBehaviour
     {
         tipDisplay.text = tips[Random.Range(0, tips.Length)];
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        while (!operation.isDone)
+        operation.allowSceneActivation = false;
+        while (operation.progress < 0.9f)
         {
-            loadingBar.value = operation.progress;
+            loadingBar.value = operation.progress/0.9f;
             
             yield return null;
         }
+        FindFirstObjectByType<AudioManager>().Stop("MainMenuMusic");
+        FindFirstObjectByType<AudioManager>().Play("CharacterSelectionMusic");
+        operation.allowSceneActivation = true;
     }
 }
