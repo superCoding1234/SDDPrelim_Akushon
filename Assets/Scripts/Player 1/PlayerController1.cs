@@ -137,9 +137,11 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         pi.Ability.UseAbility.performed += UseAbilityPerformed;
         pi.Ability.Ability.started += context =>
         {
+            StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
             isInAbility = false;
             pi.Ability.Disable();
             pi.PlayerMovement.Enable();
+            currentAbility.OffHoverAbility(gameObject);
         };
         pi.PlayerMovement.Ability.started += context =>
         {
@@ -175,7 +177,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     {
         currentHealth -= damage;
     }
-    
+
     #region PlayerMovement
     
     private void PlayerMovement()
@@ -335,6 +337,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         }
         if (isInAbility)
         {
+            anim.ResetTrigger("superAnimation");
             StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
             tsm.player1 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
@@ -369,12 +372,15 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     //required to prevent it throwing missing reference exception in input manager - see Death1
     private void UseAbilityPerformed(InputAction.CallbackContext context)
     {
-        StandardAbility currentAbility = (Mod(index, 2) == 0 ? elemental : ultimate);
+        StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
         if(currentAbility.abilityState == AbilityState.ready)
         { 
+            currentAbility.OffHoverAbility(gameObject);
             ability[Mod(index, 2)](gameObject);
             isInAbility = false;
             currentAbility.abilityState = AbilityState.active;
+            pi.Ability.Disable();
+            pi.PlayerMovement.Enable();
         }else Debug.Log("Ability is not ready");
     }
 

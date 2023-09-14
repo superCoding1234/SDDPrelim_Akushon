@@ -15,6 +15,9 @@ public class SerpentsortiaSuper : StandardAbility
 
     public override void Activate(GameObject parent)
     {
-        Instantiate(parent.GetComponent<SerpentsortiaManager>().bulletPrefab, parent.GetComponent<SerpentsortiaManager>().firingPoint.position, parent.GetComponent<SerpentsortiaManager>().skillShotIndicator.transform.rotation);
+        Instantiate(parent.GetComponent<SerpentsortiaManager>().bulletPrefab,
+            parent.GetComponent<SerpentsortiaManager>().firingPoint.position,
+            parent.GetComponent<SerpentsortiaManager>().skillShotIndicator.GetComponent<RectTransform>().rotation);
+        parent.GetComponent<Animator>().SetTrigger("superAnimation");
     }
 }
