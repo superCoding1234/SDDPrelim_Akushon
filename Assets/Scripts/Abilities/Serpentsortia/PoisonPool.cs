@@ -5,9 +5,12 @@ public class PoisonPool : MonoBehaviour
     [SerializeField] private float lifeTime;
     private float currTime;
 
-    public void OnCollisionStay2D(Collision2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player")) other.gameObject.GetComponent<IPlayerController>().TakeDamage(0.5f);
+        if(other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IPlayerController>().TakeDamage(0.5f);
+        }
     }
 
     public void Update()
