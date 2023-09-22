@@ -67,7 +67,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     private float[] activetimes = new float[2], cooldowns = new float[2];
     private int index;
     private bool isInAbility;
-    private float fixedTimeScale;
+    private float fixedTimeScale, cooldownElement, cooldownSuper;
 
     #endregion
 
@@ -98,7 +98,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
 
         currentHealth = maxHealth;
 
-            ability = new Action<GameObject>[] {elemental.Activate, ultimate.Activate};
+        ability = new Action<GameObject>[] {elemental.Activate, ultimate.Activate};
 
         #endregion
         
@@ -111,6 +111,8 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         ultimate.abilityState = AbilityState.ready;
         elemental.Deactivate(gameObject);
         ultimate.Deactivate(gameObject);
+        cooldownElement = elemental.cooldownTime + elemental.activeTime;
+        cooldownSuper = ultimate.cooldownTime + ultimate.activeTime;
         
         #endregion 
     }
@@ -145,6 +147,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         Abilities();
         Death();
         PlayerMovement();
+        UpdateCooldownValues();
     }
     
     private void FixedUpdate()
@@ -231,7 +234,9 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     {
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravityScale;
-        sr.color = Color.white;
+        Color color = sr.color;
+        color = new Color(color.r, color.g, color.b, 1);
+        sr.color = color;
         tr.emitting = false;
         coll.enabled = true;
     }
@@ -263,6 +268,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             //deathMessage.gameObject.SetActive(true);
             FindFirstObjectByType<AudioManager>().Stop("BattleMusic");
             FindFirstObjectByType<AudioManager>().Stop("BattleMusicMix");
+            PlayerPrefs.SetInt("player1Score", PlayerPrefs.GetInt("player1Score", 0) + 1);
         }
     }
 
@@ -364,6 +370,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
             tsm.player2 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
+            currentAbility.OnHoverAbility(gameObject);
             if (pi2.Ability.CycleAbility.WasPressedThisFrame())
             {
                 currentAbility.OffHoverAbility(gameObject);
@@ -371,7 +378,6 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
                 index += (int) pi2.Ability.CycleAbility.ReadValue<float>();
             }
             abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", true);
-            currentAbility.OnHoverAbility(gameObject);
         }
         else
         {
@@ -383,6 +389,32 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             }
             index = 0;
             pi2.Ability.Disable();
+        }
+    }
+    
+    private void UpdateCooldownValues()
+    {
+        if (elemental.abilityState is AbilityState.active or AbilityState.cooldown)
+        {
+            TextMeshProUGUI textMeshProUGUI = abilityFlags[0].GetComponentInChildren<TextMeshProUGUI>();
+            textMeshProUGUI.text = Mathf.FloorToInt(cooldownElement).ToString();
+            cooldownElement -= Time.deltaTime;
+            if (cooldownElement <= 0 || elemental.abilityState == AbilityState.ready)
+            {
+                textMeshProUGUI.text = "";
+                cooldownElement = elemental.cooldownTime + elemental.activeTime;
+            }
+        }
+        if (ultimate.abilityState is AbilityState.active or AbilityState.cooldown)
+        {
+            TextMeshProUGUI textMeshProUGUI = abilityFlags[1].GetComponentInChildren<TextMeshProUGUI>();
+            textMeshProUGUI.text = Mathf.FloorToInt(cooldownSuper).ToString();
+            cooldownSuper -= Time.deltaTime;
+            if (cooldownSuper <= 0 || ultimate.abilityState == AbilityState.ready)
+            {
+                textMeshProUGUI.text = "";
+                cooldownSuper = ultimate.cooldownTime + ultimate.activeTime;
+            }
         }
     }
 
