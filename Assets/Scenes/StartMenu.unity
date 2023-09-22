@@ -188,7 +188,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2027,18 +2027,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528084220}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1111213808}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25.4, y: 0}
-  m_SizeDelta: {x: 32, y: 16}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528084222
 MonoBehaviour:
@@ -2053,14 +2053,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9607843, g: 0.25533494, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5621275025976656576, guid: 47f00ae425431e049bda38d7f2c1ea64, type: 3}
+  m_Sprite: {fileID: -2653428262182581577, guid: 1b9bdd492257d764e98f7df718645625, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2285,7 +2285,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -29.3696, y: -61.012276}
+  m_AnchoredPosition: {x: -64, y: -61.012276}
   m_SizeDelta: {x: 877.1428, y: 485.0493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604370780
@@ -2337,7 +2337,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.2
+  m_fontSize: 49.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2412,18 +2412,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611397106}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 306539519}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.5, y: 0}
-  m_SizeDelta: {x: 32, y: 16}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &611397108
 MonoBehaviour:
@@ -2438,14 +2438,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9607843, g: 0.25533494, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5621275025976656576, guid: 47f00ae425431e049bda38d7f2c1ea64, type: 3}
+  m_Sprite: {fileID: -1881488202307513861, guid: b959ca75b36cd784cb8f4cc52f207f97, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2498,7 +2498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.6593, y: -72.20448}
+  m_AnchoredPosition: {x: -52, y: -72.20448}
   m_SizeDelta: {x: 895.0555, y: 462.6368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632018896
@@ -3084,7 +3084,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3705,137 +3705,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: ViperRoundStart
-    clips:
-    - {fileID: 8300000, guid: 7051e7ca978de5f41a738d567c56c58d, type: 3}
-    - {fileID: 8300000, guid: f29196f07b2664645ae37adb5876f5d2, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ViperRoundStartAfterRoundWon
-    clips:
-    - {fileID: 8300000, guid: 1c0925b8b174318458860725d64c7fb4, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ViperRoundStartAfterRoundLost
-    clips:
-    - {fileID: 8300000, guid: ef6b487e9127d0a49b342bfa2c8ade53, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ViperRoundWon
-    clips:
-    - {fileID: 8300000, guid: 5188080303c58174b94f198df0bd08ce, type: 3}
-    - {fileID: 8300000, guid: e6d23a21a3d7f35479a1062a3f1f3ed5, type: 3}
-    - {fileID: 8300000, guid: fc43ec4024669f246aa8babdf8e86d20, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ViperRoundLost
-    clips:
-    - {fileID: 8300000, guid: f8994597f321def468b4d918a2f909e8, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ViperSuper
-    clips:
-    - {fileID: 8300000, guid: 85a75c2cbd848f444904abe73f516ef3, type: 3}
-    audioGroup: {fileID: 11400000, guid: e71d69b4d6a81a54ebf012699d5c16bb, type: 2}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SovaRoundStart
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SovaRoundStartAfterRoundWon
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SovaRoundStartAfterRoundLost
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 0
-    pitch: 0
-    loop: 0
-  - name: SovaRoundWon
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SovaRoundLost
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SovaSuper
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoRoundStart
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoRoundStartAfterRoundWon
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoRoundStartAfterRoundLost
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoRoundWon
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoRoundLost
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: GeckoSuper
-    clips: []
-    audioGroup: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
   - name: MainMenuMusic
     clips:
     - {fileID: 8300000, guid: bfaa444804eb02848944a261efcb850c, type: 3}
     audioGroup: {fileID: 11400000, guid: 9a80718692773db40bacd663d2f65c65, type: 2}
-    volume: 0.549
+    volume: 1
     pitch: 1
-    loop: 1
+    loop: 0
   - name: CharacterSelectionMusic
     clips:
     - {fileID: 8300000, guid: 1c228804402955843bebd8a6344edfb9, type: 3}
     audioGroup: {fileID: 11400000, guid: 9a80718692773db40bacd663d2f65c65, type: 2}
-    volume: 0.1
+    volume: 1
     pitch: 1
-    loop: 1
+    loop: 0
   - name: BattleMusic
     clips:
     - {fileID: 8300000, guid: 75042228e24e80e4d864be9f2140e02d, type: 3}
@@ -3847,6 +3730,14 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 25d798eae3c27664aa7e7433048b11ef, type: 3}
     - {fileID: 8300000, guid: 0b8cc1f675a973648875eb4ccfc2c782, type: 3}
+    - {fileID: 8300000, guid: ee66897454f5acf43a09e3dabbb96a96, type: 3}
+    audioGroup: {fileID: 11400000, guid: 9a80718692773db40bacd663d2f65c65, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: DeathMusic
+    clips:
+    - {fileID: 8300000, guid: 0593c9d19ec943546a6d6faca823e58f, type: 3}
     audioGroup: {fileID: 11400000, guid: 9a80718692773db40bacd663d2f65c65, type: 2}
     volume: 1
     pitch: 1
@@ -4299,7 +4190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1078175181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4846,7 +4737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1190424702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6474,18 +6365,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678017774}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1069359266}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25.7, y: 0}
-  m_SizeDelta: {x: 32, y: 16}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1678017776
 MonoBehaviour:
@@ -6500,14 +6391,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9607843, g: 0.25533494, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5621275025976656576, guid: 47f00ae425431e049bda38d7f2c1ea64, type: 3}
+  m_Sprite: {fileID: -5182579535259161213, guid: 3914027687a1b4548a2089fb6937d267, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7180,18 +7071,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057802199}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 599655615}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25.8, y: 0}
-  m_SizeDelta: {x: 32, y: 16}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057802201
 MonoBehaviour:
@@ -7206,14 +7097,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9607843, g: 0.25533494, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5621275025976656576, guid: 47f00ae425431e049bda38d7f2c1ea64, type: 3}
+  m_Sprite: {fileID: -386188541740870964, guid: b0c3c8deb6fbac7479f257be036cd1b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7303,7 +7194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.974, y: -69.98932}
+  m_AnchoredPosition: {x: -50, y: -69.98932}
   m_SizeDelta: {x: 905.2678, y: 465.8222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2116771721
@@ -7331,7 +7222,8 @@ MonoBehaviour:
     Shoots the character\u2019s bullet\r\nCharacter Abilities\n\r\r\n\u2018/\u2019
     & \u2018Q\u2019: slows down time to select an ability (here you can press movement
     controls to navigate the ability)\n\nTab or Enter: for the respective players
-    activates the ability while time is slowed down\r\n\n"
+    activates the ability while time is slowed down\r\n\nShift for both sides makes
+    players dash\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b4c973d41d57184a8a41350ee5fa7c7, type: 2}
   m_sharedMaterial: {fileID: -5768797444717079578, guid: 8b4c973d41d57184a8a41350ee5fa7c7, type: 2}
@@ -7358,7 +7250,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.8
+  m_fontSize: 30.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
