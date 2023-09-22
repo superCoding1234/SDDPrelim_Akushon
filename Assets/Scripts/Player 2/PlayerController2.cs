@@ -57,7 +57,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     
     #region Death
 
-    private bool isDead;
+    [NonSerialized] public bool isDead;
 
     #endregion
 
