@@ -72,8 +72,16 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Sound of name {name} not found!");
             return;
         }
-        
-        s.source[tempMemory[names]].Stop();
+
+        try
+        {
+            s.source[tempMemory[names]].Stop();
+            Debug.Log($"Stopped {name} at AudioSource of index {tempMemory[names]}");
+        }
+        catch
+        {
+            s.source[0].Stop();
+        }
     }
 
     public bool IsPlaying(string names)

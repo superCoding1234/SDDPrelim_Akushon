@@ -1,7 +1,7 @@
 
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,7 +9,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject[] weaponPool;
     [SerializeField] private Transform firingPoint;
 
-    public void ShootWeapon(InputAction.CallbackContext context)
+    private int length;
+
+    private void Start()
+    {
+        length = weaponPool.Length;
+    }
+
+    public void ShootWeapon()
     {
         if (!canUseWeapon) return;
         GameObject projectile = weaponPool[GetAvailableProjectile()];
@@ -23,7 +30,7 @@ public class Weapon : MonoBehaviour
     }
     private int GetAvailableProjectile()
     {
-        for (int i = 0; i < weaponPool.Length; i++) if (!weaponPool[i].activeInHierarchy) return i;
+        for (int i = 0; i < length; i++) if (!weaponPool[i].activeInHierarchy) return i;
         return 0;
     }
     private IEnumerator Cooldown()

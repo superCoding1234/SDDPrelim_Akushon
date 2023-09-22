@@ -42,8 +42,8 @@ public class CharacterSelection : MonoBehaviour
                 Debug.LogWarning($"Parameter for LockInPlayer for Player{player} is not valid!");
                 break;
         }
-        PlayerPrefs.SetInt($"player{player}Element", elementCounter);
-        switch (PlayerPrefs.GetInt($"player{player}Character"))
+        PlayerPrefs.SetInt($"player{player}Element", Mod(elementCounter, 3));
+        /*switch (PlayerPrefs.GetInt($"player{player}Character"))
         {
             case 0:
                 FindFirstObjectByType<AudioManager>().Play("ViperSuper");
@@ -57,7 +57,8 @@ public class CharacterSelection : MonoBehaviour
             default:
                 Debug.LogError("FATAL: _player1Character value is NOT valid somehow!");
                 break;
-        }
+        }*/
+        Debug.Log($"{PlayerPrefs.GetInt($"player{player}Character")} with element {PlayerPrefs.GetInt($"player{player}Element")}");
     }
 
     private int Mod(int x, int y)

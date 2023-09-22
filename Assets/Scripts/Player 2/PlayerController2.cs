@@ -14,7 +14,8 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private ParticleSystem ps;
     [SerializeField] private Animator anim;
-    private Player2Inputs pi;
+    [SerializeField] private Weapon weapon;
+    [NonSerialized] public Player2Inputs pi2;
 
     //scripts settings
     [Header("Player Movement")]
@@ -35,14 +36,14 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     private float currentHealth;
 
     [Header("Abilities")] 
-    [SerializeField] private StandardAbility elemental;
+    public StandardAbility elemental;
     [SerializeField] private StandardAbility ultimate;
-    [SerializeField] private GameObject timeSlow;
-    [SerializeField] private GameObject[] abilityFlags;
-    [SerializeField] private TimeScaleManager tsm;
+    public GameObject timeSlow;
+    public GameObject[] abilityFlags;
+    public TimeScaleManager tsm;
 
     [Header("Death")] 
-    [SerializeField] private TextMeshProUGUI deathMessage;
+    //[SerializeField] private TextMeshProUGUI deathMessage;
 
     #region PlayerMovement
     
@@ -86,8 +87,8 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
 
         #region InitializeInputs
 
-        pi = new Player2Inputs();
-        pi.PlayerMovement.Enable();
+        pi2 = new Player2Inputs();
+        pi2.PlayerMovement.Enable();
         InitializeInputs();
         Debug.Log("PC1 loaded");
         
@@ -104,45 +105,35 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         #region VerifyAbilities
         
         if(elemental.abilityType == AbilityType.ultimate || ultimate.abilityType == AbilityType.elemental) Debug.LogWarning("Ability type of " + gameObject + " do not match!");
+        cooldowns = new float[2];
+        activetimes = new float[2];
+        elemental.abilityState = AbilityState.ready;
+        ultimate.abilityState = AbilityState.ready;
+        elemental.Deactivate(gameObject);
+        ultimate.Deactivate(gameObject);
         
         #endregion 
     }
     private void InitializeInputs()
     {
         #region PlayerMovement
-        
-        pi.PlayerMovement.Dash.started += context =>
-        {
-            if (canDash && movement != Vector2.zero) dash = true;
-        };
-        pi.PlayerMovement.Shoot.performed += GetComponentInChildren<Weapon>().ShootWeapon;
+
+        pi2.PlayerMovement.Dash.started += PlayerMovementDashStarted;
+        pi2.PlayerMovement.Shoot.performed += PlayerMovementShootPerformed;
         
         #endregion
 
         #region Death
 
-        pi.Death.Reset.performed += context =>
-        {
-            pi.Ability.UseAbility.performed -= UseAbilityPerformed;
-            pi.PlayerMovement.Shoot.performed -= GetComponentInChildren<Weapon>().ShootWeapon;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        };
+        pi2.Death.Reset.performed += DeathResetPerformed;
 
         #endregion
 
         #region Abilities
 
-        pi.Ability.UseAbility.performed += UseAbilityPerformed;
-        pi.Ability.Ability.started += context =>
-        {
-            isInAbility = false;
-            pi.Ability.Disable();
-        };
-        pi.PlayerMovement.Ability.started += context =>
-        {
-            isInAbility = true;
-            pi.Ability.Enable();
-        };
+        pi2.Ability.UseAbility.performed += UseAbilityPerformed;
+        pi2.Ability.Ability.started += AbilityAbilityStarted;
+        pi2.PlayerMovement.Ability.started += PlayerMovementAbilityStarted;
 
         #endregion
     }
@@ -176,7 +167,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     
     private void PlayerMovement()
     {
-        movement = pi.PlayerMovement.Move.ReadValue<Vector2>();
+        movement = pi2.PlayerMovement.Move.ReadValue<Vector2>();
 
         //dashing
         if (IsGrounded()) canDash = true;
@@ -223,7 +214,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     private void StartDashing()
     {
         dash = false;
-        Vector2 direction = pi.PlayerMovement.Move.ReadValue<Vector2>().normalized;
+        Vector2 direction = pi2.PlayerMovement.Move.ReadValue<Vector2>().normalized;
         canDash = false;
         Color tmp = sr.color;
         tmp.a = 0.5f;
@@ -264,12 +255,12 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         if (currentHealth <= 0 && !isDead)
         {
             anim.SetTrigger("isDead");
-            pi.PlayerMovement.Disable();
-            pi.Ability.Disable();
-            pi.Death.Enable();
+            pi2.PlayerMovement.Disable();
+            pi2.Ability.Disable();
+            pi2.Death.Enable();
             isDead = true;
-            deathMessage.text = "PLAYER1 DIED LMFAO";
-            deathMessage.gameObject.SetActive(true);
+            //deathMessage.text = "PLAYER1 DIED LMFAO";
+            //deathMessage.gameObject.SetActive(true);
             FindFirstObjectByType<AudioManager>().Stop("BattleMusic");
             FindFirstObjectByType<AudioManager>().Stop("BattleMusicMix");
         }
@@ -279,6 +270,44 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     {
         if (!collision.gameObject.CompareTag("KO")) return;
         currentHealth = 0;
+    }
+    
+    private void PlayerMovementDashStarted(InputAction.CallbackContext context)
+    {
+        if (canDash && movement != Vector2.zero) dash = true;
+    }
+
+    private void PlayerMovementShootPerformed(InputAction.CallbackContext context)
+    {
+        weapon.ShootWeapon();
+    }
+    
+    private void AbilityAbilityStarted(InputAction.CallbackContext context)
+    {
+        StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
+        isInAbility = false;
+        pi2.Ability.Disable();
+        pi2.PlayerMovement.Enable();
+        currentAbility.OffHoverAbility(gameObject);
+    }
+
+    private void PlayerMovementAbilityStarted(InputAction.CallbackContext context)
+    {
+        isInAbility = true;
+        pi2.Ability.Enable();
+        pi2.PlayerMovement.Disable();
+    }
+    
+    private void DeathResetPerformed(InputAction.CallbackContext context)
+    {
+        pi2.Ability.UseAbility.performed -= UseAbilityPerformed;
+        pi2.PlayerMovement.Shoot.performed -= PlayerMovementShootPerformed;
+        pi2.PlayerMovement.Dash.started -= PlayerMovementDashStarted;
+        pi2.Death.Reset.performed -= DeathResetPerformed;
+        pi2.Ability.Ability.started -= AbilityAbilityStarted;
+        pi2.PlayerMovement.Ability.started -= PlayerMovementAbilityStarted;
+        Destroy(transform.parent.gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     #endregion
@@ -331,14 +360,18 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         }
         if (isInAbility)
         {
+            anim.ResetTrigger("superAnimation");
+            StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
             tsm.player2 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
-            if (pi.Ability.CycleAbility.WasPressedThisFrame())
+            if (pi2.Ability.CycleAbility.WasPressedThisFrame())
             {
+                currentAbility.OffHoverAbility(gameObject);
                 abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", false);
-                index += (int) pi.Ability.CycleAbility.ReadValue<float>();
+                index += (int) pi2.Ability.CycleAbility.ReadValue<float>();
             }
             abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", true);
+            currentAbility.OnHoverAbility(gameObject);
         }
         else
         {
@@ -349,7 +382,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
                 o.GetComponent<Animator>().SetBool("abilityUse", false);
             }
             index = 0;
-            pi.Ability.Disable();
+            pi2.Ability.Disable();
         }
     }
 
@@ -365,9 +398,13 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         StandardAbility currentAbility = (Mod(index, 2) == 0 ? elemental : ultimate);
         if(currentAbility.abilityState == AbilityState.ready)
         { 
+            currentAbility.OffHoverAbility(gameObject);
             ability[Mod(index, 2)](gameObject);
+            currentAbility.abilityState = AbilityState.active;
             isInAbility = false;
             currentAbility.abilityState = AbilityState.active;
+            pi2.Ability.Disable();
+            pi2.PlayerMovement.Enable();
         }else Debug.Log("Ability is not ready");
     }
 
