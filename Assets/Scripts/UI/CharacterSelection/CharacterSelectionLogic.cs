@@ -15,12 +15,20 @@ public class CharacterSelectionLogic : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.S)) p1Controls[1].onClick.Invoke();
         else if(Input.GetKeyDown(KeyCode.D)) p1Controls[2].onClick.Invoke();
         else if(Input.GetKeyDown(KeyCode.A)) p1Controls[3].onClick.Invoke();
-        else if(Input.GetKeyDown(KeyCode.LeftShift)) p1Controls[4].onClick.Invoke();
+        else if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            p1Controls[4].GetComponent<ToggleAnimation>().InvokeCustom();
+            p1Controls[4].onClick.Invoke();
+        }
         if (Input.GetKeyDown(KeyCode.UpArrow)) p2Controls[0].onClick.Invoke();
         else if(Input.GetKeyDown(KeyCode.DownArrow)) p2Controls[1].onClick.Invoke();
         else if(Input.GetKeyDown(KeyCode.RightArrow)) p2Controls[2].onClick.Invoke();
         else if(Input.GetKeyDown(KeyCode.LeftArrow)) p2Controls[3].onClick.Invoke();
-        else if(Input.GetKeyDown(KeyCode.RightShift)) p2Controls[4].onClick.Invoke();
+        else if(Input.GetKeyDown(KeyCode.RightShift))
+        {
+            p2Controls[4].GetComponent<ToggleAnimation>().InvokeCustom();
+            p2Controls[4].onClick.Invoke();
+        }
     }
 
     public void StartCutsceneCoroutine()

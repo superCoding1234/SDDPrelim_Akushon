@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 1226910453175881347}
   - component: {fileID: 279633356389445166}
   - component: {fileID: 1479080275618181521}
+  - component: {fileID: 96020020042886587}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player
@@ -674,6 +675,7 @@ MonoBehaviour:
   sr: {fileID: 6310861308331092433}
   ps: {fileID: 0}
   anim: {fileID: 279633356389445166}
+  weapon: {fileID: 3678530741189129592}
   ground:
     serializedVersion: 2
     m_Bits: 8
@@ -683,14 +685,13 @@ MonoBehaviour:
   dashTime: 0.1
   slider: {fileID: 5010718915099722384}
   maxHealth: 100
-  elemental: {fileID: 0}
+  elemental: {fileID: 11400000, guid: cbef02aa40e6d224e8154fa37b5e3206, type: 2}
   ultimate: {fileID: 11400000, guid: cbef02aa40e6d224e8154fa37b5e3206, type: 2}
   timeSlow: {fileID: 0}
   abilityFlags:
   - {fileID: 0}
   - {fileID: 0}
   tsm: {fileID: 0}
-  deathMessage: {fileID: 0}
 --- !u!96 &1226910453175881347
 TrailRenderer:
   serializedVersion: 3
@@ -699,7 +700,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5825785469744572264}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -802,7 +803,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
   m_ApplyActiveColorSpace: 1
 --- !u!95 &279633356389445166
 Animator:
@@ -840,6 +841,19 @@ MonoBehaviour:
   firingPoint: {fileID: 5340280426921186027}
   skillShotIndicator: {fileID: 8142121003921701551}
   bulletPrefab: {fileID: 6762360302907645126, guid: 4ac7a9f135c1fbf49b42f38133573ace, type: 3}
+--- !u!114 &96020020042886587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825785469744572264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55d0d4a481a43409f0e6d0bf75f8c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &7845883837939694960
 GameObject:
   m_ObjectHideFlags: 0

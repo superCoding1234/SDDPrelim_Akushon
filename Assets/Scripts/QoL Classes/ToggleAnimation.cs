@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ToggleAnimation : MonoBehaviour, IPointerDownHandler
 {
@@ -10,6 +10,13 @@ public class ToggleAnimation : MonoBehaviour, IPointerDownHandler
     [SerializeField] private RectTransform content;
 
     public void OnPointerDown(PointerEventData eventData)
+    {
+        buttonState = !buttonState;
+        GetComponent<Image>().sprite = buttonState ? buttonDown : buttonUp;
+        content.position += (buttonState ? Vector3.down : Vector3.up) * 4;
+    }
+
+    public void InvokeCustom()
     {
         buttonState = !buttonState;
         GetComponent<Image>().sprite = buttonState ? buttonDown : buttonUp;

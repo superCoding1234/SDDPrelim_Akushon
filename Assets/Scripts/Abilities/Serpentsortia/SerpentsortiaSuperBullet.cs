@@ -26,7 +26,7 @@ public class SerpentsortiaSuperBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Instantiate(poisonPoolPrefab, transform.position - Vector3.down * GetComponent<CircleCollider2D>().radius, Quaternion.identity);
+        Instantiate(poisonPoolPrefab, transform.position + Vector3.down * 0.9f, Quaternion.identity);
         Destroy(gameObject);
     }
 }

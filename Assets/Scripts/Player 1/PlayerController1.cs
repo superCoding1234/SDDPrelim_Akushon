@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,7 +13,8 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private ParticleSystem ps;
     [SerializeField] private Animator anim;
-    private Player1Inputs pi;
+    [SerializeField] private Weapon weapon;
+    [NonSerialized] public Player1Inputs pi1;
 
     //scripts settings
     [Header("Player Movement")]
@@ -37,14 +35,14 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     private float currentHealth;
 
     [Header("Abilities")] 
-    [SerializeField] private StandardAbility elemental;
+    public StandardAbility elemental;
     [SerializeField] private StandardAbility ultimate;
-    [SerializeField] private GameObject timeSlow;
-    [SerializeField] private GameObject[] abilityFlags;
-    [SerializeField] private TimeScaleManager tsm;
+    public GameObject timeSlow;
+    public GameObject[] abilityFlags;
+    public TimeScaleManager tsm;
 
     [Header("Death")] 
-    [SerializeField] private TextMeshProUGUI deathMessage;
+    //[SerializeField] private TextMeshProUGUI deathMessage;
 
     #region PlayerMovement
     
@@ -88,8 +86,8 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
 
         #region InitializeInputs
 
-        pi = new Player1Inputs();
-        pi.PlayerMovement.Enable();
+        pi1 = new Player1Inputs();
+        pi1.PlayerMovement.Enable();
         InitializeInputs();
         Debug.Log("PC1 loaded");
         
@@ -106,49 +104,35 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         #region VerifyAbilities
         
         if(elemental.abilityType == AbilityType.ultimate || ultimate.abilityType == AbilityType.elemental) Debug.LogWarning("Ability type of " + gameObject + " do not match!");
-        
+        cooldowns = new float[2];
+        activetimes = new float[2];
+        elemental.abilityState = AbilityState.ready;
+        ultimate.abilityState = AbilityState.ready;
+        elemental.Deactivate(gameObject);
+        ultimate.Deactivate(gameObject);
+
         #endregion 
     }
     private void InitializeInputs()
     {
         #region PlayerMovement
-        
-        pi.PlayerMovement.Dash.started += context =>
-        {
-            if (canDash && movement != Vector2.zero) dash = true;
-        };
-        pi.PlayerMovement.Shoot.performed += GetComponentInChildren<Weapon>().ShootWeapon;
+
+        pi1.PlayerMovement.Dash.started += PlayerMovementDashStarted;
+        pi1.PlayerMovement.Shoot.performed += PlayerMovementShootPerformed;
         
         #endregion
 
         #region Death
 
-        pi.Death.Reset.performed += context =>
-        {
-            pi.Ability.UseAbility.performed -= UseAbilityPerformed;
-            pi.PlayerMovement.Shoot.performed -= GetComponentInChildren<Weapon>().ShootWeapon;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        };
+        pi1.Death.Reset.performed += DeathResetPerformed;
 
         #endregion
 
         #region Abilities
 
-        pi.Ability.UseAbility.performed += UseAbilityPerformed;
-        pi.Ability.Ability.started += context =>
-        {
-            StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
-            isInAbility = false;
-            pi.Ability.Disable();
-            pi.PlayerMovement.Enable();
-            currentAbility.OffHoverAbility(gameObject);
-        };
-        pi.PlayerMovement.Ability.started += context =>
-        {
-            isInAbility = true;
-            pi.Ability.Enable();
-            pi.PlayerMovement.Disable();
-        };
+        pi1.Ability.UseAbility.performed += UseAbilityPerformed;
+        pi1.Ability.Ability.started += AbilityAbilityStarted;
+        pi1.PlayerMovement.Ability.started += PlayerMovementAbilityStarted;
 
         #endregion
     }
@@ -182,7 +166,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     
     private void PlayerMovement()
     {
-        movement = pi.PlayerMovement.Move.ReadValue<Vector2>();
+        movement = pi1.PlayerMovement.Move.ReadValue<Vector2>();
 
         //dashing
         if (IsGrounded()) canDash = true;
@@ -229,7 +213,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     private void StartDashing()
     {
         dash = false;
-        Vector2 direction = pi.PlayerMovement.Move.ReadValue<Vector2>().normalized;
+        Vector2 direction = pi1.PlayerMovement.Move.ReadValue<Vector2>().normalized;
         canDash = false;
         Color tmp = sr.color;
         tmp.a = 0.5f;
@@ -270,12 +254,12 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
         if (currentHealth <= 0 && !isDead)
         {
             anim.SetTrigger("isDead");
-            pi.PlayerMovement.Disable();
-            pi.Ability.Disable();
-            pi.Death.Enable();
+            pi1.PlayerMovement.Disable();
+            pi1.Ability.Disable();
+            pi1.Death.Enable();
             isDead = true;
-            deathMessage.text = "PLAYER1 DIED LMFAO";
-            deathMessage.gameObject.SetActive(true);
+            //deathMessage.text = "PLAYER1 DIED LMFAO";
+            //deathMessage.gameObject.SetActive(true);
             FindFirstObjectByType<AudioManager>().Stop("BattleMusic");
             FindFirstObjectByType<AudioManager>().Stop("BattleMusicMix");
         }
@@ -285,6 +269,45 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
     {
         if (!collision.gameObject.CompareTag("KO")) return;
         currentHealth = 0;
+    }
+    
+    private void PlayerMovementDashStarted(InputAction.CallbackContext context)
+    {
+        if (canDash && movement != Vector2.zero) dash = true;
+    }
+
+    private void PlayerMovementShootPerformed(InputAction.CallbackContext context)
+    {
+        weapon.ShootWeapon();
+    }
+    
+    private void AbilityAbilityStarted(InputAction.CallbackContext context)
+    {
+        StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
+        isInAbility = false;
+        pi1.Ability.Disable();
+        pi1.PlayerMovement.Enable();
+        currentAbility.OffHoverAbility(gameObject);
+    }
+
+    private void PlayerMovementAbilityStarted(InputAction.CallbackContext context)
+    {
+        Debug.Log("ability overlay on");
+        isInAbility = true;
+        pi1.Ability.Enable();
+        pi1.PlayerMovement.Disable();
+    }
+    
+    private void DeathResetPerformed(InputAction.CallbackContext context)
+    {
+        pi1.Ability.UseAbility.performed -= UseAbilityPerformed;
+        pi1.PlayerMovement.Shoot.performed -= PlayerMovementShootPerformed;
+        pi1.PlayerMovement.Dash.started -= PlayerMovementDashStarted;
+        pi1.Death.Reset.performed -= DeathResetPerformed;
+        pi1.Ability.Ability.started -= AbilityAbilityStarted;
+        pi1.PlayerMovement.Ability.started -= PlayerMovementAbilityStarted;
+        Destroy(transform.parent.gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     #endregion
@@ -299,8 +322,10 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
                 break;
             case AbilityState.active:
                 activetimes[0] += Time.deltaTime;
+                elemental.WhileActive(gameObject);
                 if (activetimes[0] >= elemental.activeTime)
                 {
+                    elemental.Deactivate(gameObject);
                     elemental.abilityState = AbilityState.cooldown;
                     activetimes[0] = 0;
                 }
@@ -320,8 +345,10 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
                 break;
             case AbilityState.active:
                 activetimes[1] += Time.deltaTime;
+                ultimate.WhileActive(gameObject);
                 if (activetimes[1] >= ultimate.activeTime)
                 {
+                    ultimate.Deactivate(gameObject);
                     ultimate.abilityState = AbilityState.cooldown;
                     activetimes[1] = 0;
                 }
@@ -341,11 +368,11 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
             StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
             tsm.player1 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
-            if (pi.Ability.CycleAbility.WasPressedThisFrame())
+            if (pi1.Ability.CycleAbility.WasPressedThisFrame())
             {
                 currentAbility.OffHoverAbility(gameObject);
                 abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", false);
-                index += (int) pi.Ability.CycleAbility.ReadValue<float>();
+                index += (int) pi1.Ability.CycleAbility.ReadValue<float>();
             }
             abilityFlags[Mod(index, 2)].GetComponent<Animator>().SetBool("abilityUse", true);
             currentAbility.OnHoverAbility(gameObject);
@@ -359,7 +386,7 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
                 o.GetComponent<Animator>().SetBool("abilityUse", false);
             }
             index = 0;
-            pi.Ability.Disable();
+            pi1.Ability.Disable();
         }
     }
 
@@ -379,8 +406,8 @@ public class PlayerController1 : MonoBehaviour, IPlayerController
             ability[Mod(index, 2)](gameObject);
             isInAbility = false;
             currentAbility.abilityState = AbilityState.active;
-            pi.Ability.Disable();
-            pi.PlayerMovement.Enable();
+            pi1.Ability.Disable();
+            pi1.PlayerMovement.Enable();
         }else Debug.Log("Ability is not ready");
     }
 

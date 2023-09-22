@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a269718e4e42faa8172209866e088f, type: 3}
-  m_Name: SS
+  m_Script: {fileID: 11500000, guid: e8d5da432185425a907331b78c910663, type: 3}
+  m_Name: BigPapaSuper 2
   m_EditorClassIdentifier: 
-  abilityType: 0
-  cooldownTime: 0
-  activeTime: 0
+  abilityType: 1
+  cooldownTime: 15
+  activeTime: 0.1
