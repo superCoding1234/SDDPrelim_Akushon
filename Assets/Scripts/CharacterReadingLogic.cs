@@ -85,9 +85,4 @@ public class CharacterReadingLogic : MonoBehaviour
         tsmFlag1.GetComponentInChildren<TextMeshProUGUI>().text = $"Score: {PlayerPrefs.GetInt("player1Score", 0)}";
         tsmFlag2.GetComponentInChildren<TextMeshProUGUI>().text = $"Score: {PlayerPrefs.GetInt("player2Score", 0)}";
     }
-
-    private void Update()
-    {
-        Debug.Log(elements[PlayerPrefs.GetInt("player1Element")]);
-    }
 }
