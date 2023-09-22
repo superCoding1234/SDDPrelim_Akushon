@@ -1,18 +1,27 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BombSuperBullet : MonoBehaviour, IPlayerController
 {
+    public static BombSuperBullet bombSuperBullet;
     public GameObject target;
     [SerializeField] private float speed, damage, maxHealth;
     [SerializeField] private Slider slider;
     private float currHealth;
     private Rigidbody2D rb;
+    private Animator anim;
+    private SpriteRenderer sr;
+    private bool canDamage = true;
 
     private void Start()
     {
+        if(bombSuperBullet) Destroy(bombSuperBullet.gameObject);
+        bombSuperBullet = this;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         currHealth = maxHealth;
         slider.maxValue = maxHealth;
     }
@@ -25,24 +34,44 @@ public class BombSuperBullet : MonoBehaviour, IPlayerController
         {
             Destroy(gameObject);
         }
+        
+        UpdateAnimationState();
     }
 
     private void FixedUpdate()
     {
         Vector2 direction = (Vector2)target.transform.position - rb.position;
         direction.Normalize();
-        float rotation = Vector3.Cross(direction, transform.up).z;
+        float rotation = Vector3.Cross(direction, transform.right).z;
         rb.angularVelocity = -rotation * 1000f;
-        rb.velocity = transform.up * (speed * Time.deltaTime);
+        rb.velocity = transform.right * (speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void UpdateAnimationState()
     {
-        if(other.gameObject.CompareTag("Player")) other.gameObject.GetComponent<IPlayerController>().TakeDamage(damage);
+        sr.flipY = transform.position.x > target.transform.position.x;
     }
 
-    public void TakeDamage(float damage)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        currHealth -= damage;
+        if(other.gameObject.CompareTag("Player") && canDamage)
+        {
+            anim.SetTrigger("explode");
+            other.gameObject.GetComponent<IPlayerController>().TakeDamage(damage);
+            canDamage = false;
+            StartCoroutine(StartDamageBuffer());
+        }
+        
+    }
+
+    private IEnumerator StartDamageBuffer()
+    {
+        yield return new WaitForSeconds(1f);
+        canDamage = true;
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        currHealth -= dmg;
     }
 }

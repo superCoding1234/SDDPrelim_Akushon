@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,6 +78,12 @@ public class CharacterReadingLogic : MonoBehaviour
             instantiatedPlayer1.gameObject.transform.GetChild(0).gameObject;
         abilityFlag2[0].sprite = elements[PlayerPrefs.GetInt("player2Element")];
         player2.GetComponentInChildren<ElementalManager>().target = player1.transform.GetChild(0).gameObject;
+    }
+
+    private void Start()
+    {
+        tsmFlag1.GetComponentInChildren<TextMeshProUGUI>().text = $"Score: {PlayerPrefs.GetInt("player1Score", 0)}";
+        tsmFlag2.GetComponentInChildren<TextMeshProUGUI>().text = $"Score: {PlayerPrefs.GetInt("player2Score", 0)}";
     }
 
     private void Update()
