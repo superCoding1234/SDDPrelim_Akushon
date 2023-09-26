@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8508364451235427543}
   m_Layer: 6
   m_Name: BombSuper Bullet 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
