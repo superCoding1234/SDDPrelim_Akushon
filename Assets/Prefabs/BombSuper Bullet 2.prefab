@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 9083410559202142807}
   m_Layer: 7
   m_Name: BombSuper Bullet 2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 800
+  speed: 280
   damage: 2
   maxHealth: 100
   slider: {fileID: 4380276625791406777}
