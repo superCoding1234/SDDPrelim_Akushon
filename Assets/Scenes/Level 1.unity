@@ -9317,7 +9317,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de1ed0d86d92a2d42b318d3007637de6, type: 2}
   elementals2:
   - {fileID: 11400000, guid: 203844ecc773b9043acd952a6f1b00a1, type: 2}
-  - {fileID: 11400000, guid: 2d7271d9dc354be42956ca8b19472033, type: 2}
+  - {fileID: 11400000, guid: 606b645b90d52e249a57225d2d9cdbec, type: 2}
   - {fileID: 11400000, guid: 5f02a52638415a8489fcd671e6ed18f9, type: 2}
   spawnPoint1: {fileID: 1535821411}
   spawnPoint2: {fileID: 45703020}
