@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Water 2
   m_EditorClassIdentifier: 
   abilityType: 0
-  cooldownTime: 5
-  activeTime: 4
+  cooldownTime: 17
+  activeTime: 3

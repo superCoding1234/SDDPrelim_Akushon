@@ -113,8 +113,8 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         ultimate.Deactivate(gameObject);
         cooldownElement = elemental.cooldownTime + elemental.activeTime;
         cooldownSuper = ultimate.cooldownTime + ultimate.activeTime;
-        
-        #endregion 
+
+        #endregion
     }
     private void InitializeInputs()
     {
@@ -165,7 +165,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     {
         currentHealth -= damage;
     }
-    
+
     #region PlayerMovement
     
     private void PlayerMovement()
@@ -268,7 +268,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             //deathMessage.gameObject.SetActive(true);
             FindFirstObjectByType<AudioManager>().Stop("BattleMusic");
             FindFirstObjectByType<AudioManager>().Stop("BattleMusicMix");
-            PlayerPrefs.SetInt("player1Score", PlayerPrefs.GetInt("player1Score", 0) + 1);
+            PlayerPrefs.SetInt("player2Score", PlayerPrefs.GetInt("player2Score", 0) + 1);
         }
     }
 
@@ -299,6 +299,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
 
     private void PlayerMovementAbilityStarted(InputAction.CallbackContext context)
     {
+        Debug.Log("ability overlay on");
         isInAbility = true;
         pi2.Ability.Enable();
         pi2.PlayerMovement.Disable();
@@ -328,8 +329,10 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
                 break;
             case AbilityState.active:
                 activetimes[0] += Time.deltaTime;
+                elemental.WhileActive(gameObject);
                 if (activetimes[0] >= elemental.activeTime)
                 {
+                    elemental.Deactivate(gameObject);
                     elemental.abilityState = AbilityState.cooldown;
                     activetimes[0] = 0;
                 }
@@ -349,8 +352,10 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
                 break;
             case AbilityState.active:
                 activetimes[1] += Time.deltaTime;
+                ultimate.WhileActive(gameObject);
                 if (activetimes[1] >= ultimate.activeTime)
                 {
+                    ultimate.Deactivate(gameObject);
                     ultimate.abilityState = AbilityState.cooldown;
                     activetimes[1] = 0;
                 }
@@ -368,7 +373,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         {
             anim.ResetTrigger("superAnimation");
             StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
-            tsm.player2 = true;
+            tsm.player1 = true;
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", true);
             currentAbility.OnHoverAbility(gameObject);
             if (pi2.Ability.CycleAbility.WasPressedThisFrame())
@@ -382,7 +387,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
         else
         {
             timeSlow.GetComponent<Animator>().SetBool("abilityUse", false);
-            tsm.player2 = false;
+            tsm.player1 = false;
             foreach (var o in abilityFlags)
             {
                 o.GetComponent<Animator>().SetBool("abilityUse", false);
@@ -391,7 +396,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             pi2.Ability.Disable();
         }
     }
-    
+
     private void UpdateCooldownValues()
     {
         if (elemental.abilityState is AbilityState.active or AbilityState.cooldown)
@@ -399,7 +404,7 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
             TextMeshProUGUI textMeshProUGUI = abilityFlags[0].GetComponentInChildren<TextMeshProUGUI>();
             textMeshProUGUI.text = Mathf.FloorToInt(cooldownElement).ToString();
             cooldownElement -= Time.deltaTime;
-            if (cooldownElement <= 0 || elemental.abilityState == AbilityState.ready)
+            if (cooldownElement <= 0 || elemental.abilityState == AbilityState.ready) 
             {
                 textMeshProUGUI.text = "";
                 cooldownElement = elemental.cooldownTime + elemental.activeTime;
@@ -427,12 +432,11 @@ public class PlayerController2 : MonoBehaviour, IPlayerController
     //required to prevent it throwing missing reference exception in input manager - see Death1
     private void UseAbilityPerformed(InputAction.CallbackContext context)
     {
-        StandardAbility currentAbility = (Mod(index, 2) == 0 ? elemental : ultimate);
+        StandardAbility currentAbility = Mod(index, 2) == 0 ? elemental : ultimate;
         if(currentAbility.abilityState == AbilityState.ready)
         { 
             currentAbility.OffHoverAbility(gameObject);
             ability[Mod(index, 2)](gameObject);
-            currentAbility.abilityState = AbilityState.active;
             isInAbility = false;
             currentAbility.abilityState = AbilityState.active;
             pi2.Ability.Disable();
